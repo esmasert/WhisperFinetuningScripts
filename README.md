@@ -47,11 +47,11 @@ As the steps, first we need to generate syntehic sentences having particulater t
 
 There is a script to collect the books in txt formats from www.gutenberg.org website. Project Gutenberg is an online library of free eBooks. Then according to keywords the script extract the sentences that have the keywords.
 
-WebScrapingBooks.ipynb
+```WebScrapingBooks.ipynb```
 
 Also there is another script to do webscraping from Wikipedia.
 
-WebScrapingWikipedia.ipynb
+```WebScrapingWikipedia.ipynb```
 
 After having the texts we can generate audios by using ToucanTTS (https://github.com/DigitalPhonetics/IMS-Toucan). IMS Toucan is a toolkit for training, using, and teaching state-of-the-art Text-to-Speech Synthesis, developed at the Institute for Natural Language Processing (IMS), University of Stuttgart, Germany, official home of the massively multilingual (more than 7000 languages) ToucanTTS system. 
 However before running the Toucan TTS script, we also need to create a folder that have refernece audios. These audio files will have the voices of synthetic audio files to be genrated. I usually use CommonVoice files as reference audios to generate synthetic audio files because they are clean, understandable, and free from background noise. 
@@ -62,7 +62,7 @@ Therefore, I believe it is better to first generate clean synthetic audios and t
 
 The script to generate synthetic audio files with Toucan TTS : 
 
-GenerateSyntheticAudioToucanTTS.py
+```GenerateSyntheticAudioToucanTTS.py```
 
 Remember! ToucanTTS is not a perfect tool. Everyday there are a new publisted TTS tools.
 
@@ -182,7 +182,7 @@ https://github.com/IntelligentVoice/WhisperFinetuningScripts/blob/main/run_creat
 
 Moreover, we can increase the amount of data by augmenting the existing dataset through trimming and combining different audio files. Here is the script for YouTube files:
 
-GenerateMoreYoutubeFilesAugmentation.ipynb
+```GenerateMoreYoutubeFilesAugmentation.ipynb```
 
 ## Augmentation in Training
 
@@ -365,15 +365,21 @@ For running the Sclite scoring script, these are the steps should be processed i
 
 •	  Additionally, you can create a colored analysis using:
 
-ColouredAnalysis.ipynb
+```ColouredAnalysis.ipynb```
 
 ## Checking TP Rate:
 To analyze keywords or loan words, we can check and count the number of True Positives.
 
-Script: scoreCSV_FP.py
+```scoreCSV_FP.py```
 
-Important Note:
+**Important Note:**
 Don’t forget to check all test results to see whether punctuation has been generated correctly!
 
 
+# Get Word Timings:
+
+Sometimes, we need the timing of each word in the data for augmentation or other data processing tasks.
+To achieve this, we can run the audio files using the ASR script in the <res.batch> folder.
+This script in **Convproc2** will generate PSRT files. Then, we need to place the PSRT files and the GT TXT files in the same folder and run the following script:
+```/home/esma.sert@CHASEITS/word_timing/alignment/alignment2.sh```
 
