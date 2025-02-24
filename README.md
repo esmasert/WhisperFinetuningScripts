@@ -1,8 +1,7 @@
 # WhisperFinetuningScripts
 Scripts used from collecting data to the fine-tuning process.
 
-
-Fine-Tuning Whisper Models
+Whisper fine-tuning is the process of adapting the pre-trained Whisper ASR model to improve its performance on specific datasets or tasks. By training it further with specialized data, it enhances accuracy for particular use cases, such as different accents, specific topics, or unique environments.
 
 # Collecting Data
 
@@ -40,13 +39,39 @@ https://github.com/IntelligentVoice/WhisperFinetuningScripts/blob/main/downloadS
 After downloading all possible subtitles, a cleaning script, which is explained below, should be run for the downloaded subtitles.
 
 
+## Generating Synthetic Data
+
+If there is not enough data for a language, or terms or if we want to boost centatin keywords we can generate Syntheitc data.
+
+As the steps, first we need to generate syntehic sentences having particulater topics or keywords with using LLM (CoPilot), or alternatively we can do web scraping and collect all the sentence that have the keywords.
+
+There is a script to collect the books in txt formats from www.gutenberg.org website. Project Gutenberg is an online library of free eBooks. Then according to keywords the script extract the sentences that have the keywords.
+
+WebScrapingBooks.ipynb
+
+Also there is another script to do webscraping from Wikipedia.
+
+WebScrapingWikipedia.ipynb
+
+After having the texts we can generate audios by using ToucanTTS (https://github.com/DigitalPhonetics/IMS-Toucan). IMS Toucan is a toolkit for training, using, and teaching state-of-the-art Text-to-Speech Synthesis, developed at the Institute for Natural Language Processing (IMS), University of Stuttgart, Germany, official home of the massively multilingual (more than 7000 languages) ToucanTTS system. 
+However before running the Toucan TTS script, we also need to create a folder that have refernece audios. These audio files will have the voices of synthetic audio files to be genrated. I usually use CommonVoice files as reference audios to generate synthetic audio files because they are clean, understandable, and free from background noise. 
+
+If the reference audio is noisy, the generated synthetic audio will also be noisy, but not in a natural way. 
+
+Therefore, I believe it is better to first generate clean synthetic audios and then apply augmentations, such as adding background noise, overtalk, and backchannel effects. 
+
+The script to generate synthetic audio files with Toucan TTS : 
+
+GenerateSyntheticAudioToucanTTS.py
+
+Remember! ToucanTTS is not a perfect tool. Everyday there are a new publisted TTS tools.
+
 ## Cleaning The Text Data
 
 Data should have accurate letters/characters. For example, a Mandarin dataset should contain only simplified Chinese characters, whereas a Cantonese dataset should contain only traditional characters.
 
 Example Script: 
 https://github.com/IntelligentVoice/WhisperFinetuningScripts/blob/main/CheckSimplifiedCharacters.ipynb
-
 
 ## Normalizing The Data
 
