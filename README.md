@@ -178,6 +178,12 @@ Before training has started, ideally, we want to augment the audio quality. Ther
 Example Script:
 https://github.com/IntelligentVoice/WhisperFinetuningScripts/blob/main/run_create_gsm.py
 
+## Increasing The Number of Data
+
+Moreover, we can increase the amount of data by augmenting the existing dataset through trimming and combining different audio files. Here is the script for YouTube files:
+
+GenerateMoreYoutubeFilesAugmentation.ipynb
+
 ## Augmentation in Training
 
 Furthermore, in training script, there is an option for augmentation. It uses Musan dataset (https://arxiv.org/pdf/1510.08484) and combines music, background noise etc. audios together. 
@@ -206,7 +212,7 @@ For training we should have 3 or at least 2 different .json files. These are; tr
 
 Typically, the proposed ratio is 0.8 for training, 0.1 for testing, and 0.1 for validation. However, if there are many files, such as over a million, the ratio for the test and validation datasets can be less to not slow the process.
 
-## Adding Silence Audios, Background noises and “…” Markers
+## Adding Silence to Audio Files, Background noises and “…” Markers
 
 To decrease the hallucinations, we can add audios that have silence or background noises with the corresponding “…” GT text. We are using Musan dataset for this for now. (https://www.openslr.org/17/)
 
@@ -257,8 +263,12 @@ pip install markdown_cjk_spacing
 pip install jiwer
 ```
 
-This is an example of Whisper Medium Model Finetuning script:
+This is an example of Whisper Medium Model Finetuning script for Mandarin:
 https://github.com/IntelligentVoice/WhisperFinetuningScripts/blob/main/whMedium_zh_Mandarin_Finetuning_Augment.py
+
+This is another script for Finnish language:
+
+WhisperFinetuning_fi_Finnish.py
 
 Training script can be run within a screen session.
 
@@ -352,4 +362,18 @@ For running the Sclite scoring script, these are the steps should be processed i
 ```/home/esma/sclite/dataPrep/cleanup.sh <lang_code>```
 
 •	  Make sure that ```replace_<lang_code>_file.sh``` exists in ```/home/esma/sclite/dataPrep``` folder. Otherwise, you can't do numbers to text conversion for that language.
+
+•	  Additionally, you can create a colored analysis using:
+
+ColouredAnalysis.ipynb
+
+## Checking TP Rate:
+To analyze keywords or loan words, we can check and count the number of True Positives.
+
+Script: scoreCSV_FP.py
+
+Important Note:
+Don’t forget to check all test results to see whether punctuation has been generated correctly!
+
+
 
