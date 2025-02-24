@@ -184,6 +184,28 @@ Moreover, we can increase the amount of data by augmenting the existing dataset 
 
 ```GenerateMoreYoutubeFilesAugmentation.ipynb```
 
+## Generating Overtalk and Backchannel Data
+
+### Overtalk
+
+It is empirically confirmed that adding overtalk and backchannel data to training decreases deletions when speakers change.
+
+To generate overtalk data, we first need word timings (explained at the end of the document). After obtaining all files with "align.psrt" extensions in a folder, we divide the files into two subgroups and merge them sequentially by overlapping the end of one file with the beginning of another at random time intervals to generate overtalks.
+
+Here is the script:
+
+```CreateOvertalkData.ipynb```
+
+### Backchannel
+
+Similarly, to generate backchannel data, we need word timings. But most importantly, we need to know the most common backchannel words, such as 'okay,' 'yes,' 'alright,' and 'I see,' in the target language. We can use an LLM to identify the most frequently used backchannel words in the desired language.
+
+After obtaining a list of backchannel words, we can extract audio files that contain these words along with their word timings. Then, we insert the words into the audio files and edit their corresponding ground truth text files.
+
+Here is the script:
+
+```InsertBackChannelWordsData.ipynb```
+
 ## Augmentation in Training
 
 Furthermore, in training script, there is an option for augmentation. It uses Musan dataset (https://arxiv.org/pdf/1510.08484) and combines music, background noise etc. audios together. 
